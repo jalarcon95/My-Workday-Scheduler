@@ -1,9 +1,9 @@
 const localeSettings = {};
-dayjs.locale(localeSettings)
+dayjs.locale(localeSettings);
 
 $(function () {
 
-  const currentHour = dayjs.format('H');
+  const currentHour = dayjs().format('H');
 
   function hourlyColor() {
     $('.time-block').each(function() {
@@ -15,7 +15,7 @@ $(function () {
   }
 
   function textEntry() {
-    $('.savedBtn').on('click', function() {
+    $('.saveBtn').on('click', function() {
       const key = $(this).parent().attr('id');
       const value = $(this).siblings('description').val();
       localStorage.setItem(key, value);
@@ -35,17 +35,24 @@ $(function () {
    });
   }
 
-  $('.time-block').each(function(){
+  $('.time-block').each(function() {
     const key = $(this).attr('id');
     const value = localStorage.getItem(key);
     $(this).children('.description').val(value);
   });
 
   function updateTime() {
-    const dateElemnt = $('#date');
+    const dateElement = $('#date');
     const timeElement = $('#time');
     const currentDate = dayjs().format('dddd, MMMM D, YYYY');
-    const currentTime = ddayjs().format('hh:mm:ss A');
-    dateElement.text(currentData);
+    const currentTime = dayjs().format('hh:mm:ss A');
+    dateElement.text(currentDate);
     timeElement.text(currentTime);
   }
+
+  hourlyColor();
+  textEntry();
+  refreshColor();
+
+  setInterval(updateTime, 1000);
+});
